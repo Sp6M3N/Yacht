@@ -1,0 +1,486 @@
+@import 'global';
+
+:root, [data-theme="default"] {
+    // main
+    @include defineColorHSL(--color-primary-darker, 220, 33%, 23%);
+    @include defineColorHSL(--color-primary-dark, 220, 33%, 33%);
+    @include defineColorHSL(--color-primary, 220, 33%, 43%);
+    @include defineColorHSL(--color-primary-light, 220, 33%, 53%);
+    @include defineColorHSL(--color-primary-lighter, 220, 33%, 63%);
+  
+    @include defineColorHSL(--color-accent-darker, 356, 32%, 24%);
+    @include defineColorHSL(--color-accent-dark, 356, 32%, 34%);
+    @include defineColorHSL(--color-accent, 356, 32%, 44%);
+    @include defineColorHSL(--color-accent-light, 356, 32%, 54%);
+    @include defineColorHSL(--color-accent-lighter, 356, 32%, 64%);
+  
+    @include defineColorHSL(--color-black, 240, 8%, 12%);
+    @include defineColorHSL(--color-white, 0, 0%, 100%);
+    
+    // secondary
+    @include defineColorHSL(--color-secondary-darker, 47, 32%, 21%);
+    @include defineColorHSL(--color-secondary-dark, 47, 32%, 31%);
+    @include defineColorHSL(--color-secondary, 47, 32%, 41%);
+    @include defineColorHSL(--color-secondary-light, 47, 32%, 51%);
+    @include defineColorHSL(--color-secondary-lighter, 47, 32%, 61%);
+  
+    // feedback
+    @include defineColorHSL(--color-warning-darker, 46, 35%, 21%);
+    @include defineColorHSL(--color-warning-dark, 46, 35%, 31%);
+    @include defineColorHSL(--color-warning, 46, 35%, 41%);
+    @include defineColorHSL(--color-warning-light, 46, 35%, 51%);
+    @include defineColorHSL(--color-warning-lighter, 46, 35%, 61%);
+  
+    @include defineColorHSL(--color-success-darker, 94, 14%, 12%);
+    @include defineColorHSL(--color-success-dark, 94, 14%, 22%);
+    @include defineColorHSL(--color-success, 94, 14%, 32%);
+    @include defineColorHSL(--color-success-light, 94, 14%, 42%);
+    @include defineColorHSL(--color-success-lighter, 94, 14%, 52%);
+  
+    @include defineColorHSL(--color-error-darker, 355, 34%, 24%);
+    @include defineColorHSL(--color-error-dark, 355, 34%, 34%);
+    @include defineColorHSL(--color-error, 355, 34%, 44%);
+    @include defineColorHSL(--color-error-light, 355, 34%, 54%);
+    @include defineColorHSL(--color-error-lighter, 355, 34%, 64%);
+  
+    // color contrasts
+    @include defineColorHSL(--color-bg, 0, 0%, 100%);
+    @include defineColorHSL(--color-contrast-lower, 0, 0%, 95%);
+    @include defineColorHSL(--color-contrast-low, 240, 1%, 83%);
+    @include defineColorHSL(--color-contrast-medium, 240, 1%, 48%);
+    @include defineColorHSL(--color-contrast-high, 240, 4%, 20%);
+    @include defineColorHSL(--color-contrast-higher, 240, 8%, 12%);
+  }
+  
+  [data-theme] {
+    background-color: var(--color-bg);
+    color: var(--color-contrast-high);
+  }
+  
+  
+
+/* -------------------------------- 
+
+Title: Main Header
+Descr: Accessible website navigation
+
+-------------------------------- */
+
+:root {
+    --main-header-height: 50px;
+    --main-header-height-md: 70px;
+  }
+  
+  .main-header {
+    position: relative;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-contrast-low);
+    z-index: var(--zindex-header);
+  }
+  
+  .main-header__layout {
+    padding: var(--space-sm) 0;
+  }
+  
+  // logo
+  .main-header__logo {
+    a, svg, img {
+      display: block;
+    }
+  }
+  
+  // nav
+  .main-header__nav {
+    margin-top: var(--space-sm);
+    font-size: 1.25em; // controls the font-size of all elements (sm)
+  }
+  
+  .main-header__nav-label { // menu label
+    color: var(--color-contrast-medium);
+    margin-bottom: var(--space-xs);
+  }
+  
+  .main-header__nav-item { // nav list item
+    margin-bottom: var(--space-xs);
+  }
+  
+  .main-header__nav-link { // link within list item
+    color: var(--color-contrast-higher);
+  
+    &[aria-current] { // style of selected link
+      color: var(--color-primary);
+    }
+  }
+  
+  .main-header__nav-divider { // element used to separate nav items
+    height: 1px;
+    width: 100%;
+    background-color: var(--color-contrast-low);
+  }
+  
+  // menu trigger
+  .main-header__nav-trigger { // menu button
+    display: none; // hidden if js = disabled
+  }
+  
+  // menu icon
+  .main-header__nav-trigger-icon {
+    position: relative;
+    display: block;
+    height: 2px;
+    width: 1em;
+    background-color: currentColor;
+    margin-right: var(--space-xxs);
+    transition: 0.2s;
+  
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: inherit;
+      height: inherit;
+      background-color: currentColor;
+      transition: 0.2s;
+    }
+  
+    &::before {
+      transform: translateY(-5px);
+    }
+  
+    &::after {
+      transform: translateY(5px);
+    }
+  }
+  
+  .main-header__nav-trigger[aria-expanded="true"] .main-header__nav-trigger-icon {
+    background-color: transparent;
+  
+    &::before {
+      transform: rotate(45deg);
+    }
+  
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+  
+  .js { // if js = enabled
+    .main-header, .main-header__layout {
+      height: var(--main-header-height);
+    }
+  
+    .main-header__layout {
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .main-header__nav {
+      margin-top: 0;
+      position: absolute;
+      top: var(--main-header-height);
+      left: 0;
+      width: 100%;
+      background-color: var(--color-bg);
+      box-shadow: var(--shadow-md);
+      padding: var(--component-padding);
+      display: none;
+    }
+  
+    .main-header__nav--is-visible {
+      display: block;
+    }
+  
+    .main-header__nav-trigger {
+      display: inline-flex; // show btn
+    }
+  }
+  
+  @include breakpoint(md) {
+    .main-header, .main-header__layout {
+      height: var(--main-header-height-md);
+    }
+  
+    .main-header__layout {
+      padding: 0;
+      display: table; // flex fallback
+      width: 100%; // flex fallback
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .main-header__logo {
+      display: table-cell; // flex fallback
+      vertical-align: middle; // flex fallback
+    }
+  
+    .main-header__nav {
+      float: right; // flex fallback
+      margin-top: 0;
+      font-size: 0.875em; // controls the font-size of all elements (md)
+    }
+  
+    .main-header__nav-label { // hide label
+      position: absolute;
+      clip: rect(1px, 1px, 1px, 1px);
+      clip-path: inset(50%);
+    }
+  
+    .main-header__nav-list {
+      display: flex;
+      align-items: center;
+    }
+  
+    .main-header__nav-item {
+      display: inline-block; // flex fallback
+      margin-bottom: 0;
+      margin-left: var(--space-md);
+    }
+  
+    .main-header__nav-divider {
+      height: 1em;
+      width: 1px;
+    }
+  
+    .js {
+      .main-header, .main-header__layout {
+        height: var(--main-header-height-md);
+      }
+  
+      .main-header__nav {
+        padding: 0;
+        background-color: transparent;
+        position: static;
+        width: auto;
+        box-shadow: none;
+        display: block;
+      }
+  
+      .main-header__nav-trigger {
+        display: none;
+      }
+    }
+  }
+
+  /* -------------------------------- 
+
+Title: Newsletter 
+Descr: Newsletter form template
+
+-------------------------------- */
+
+.newsletter {
+    text-align: center;
+    padding: var(--space-md) 0;
+  }
+  
+  .newsletter__form, .newsletter__feedback {
+    max-width: 520px;
+  }
+  
+  .newsletter__description {
+    line-height: 1.4;
+  }
+  
+  .newsletter__form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap: var(--space-xxs);
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .newsletter__feedback {
+    font-size: var(--text-sm);
+    padding: var(--space-xs);
+    border-radius: 0.25em;
+    margin: var(--space-sm) auto 0;
+    // hide
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+  
+    &::before {
+      content: '';
+      @include triangle(up, 10px, currentColor);
+      position: absolute;
+      top: 0;
+      left: 1em;
+      transform: translateY(-100%);
+    }
+  }
+  
+  .newsletter__feedback--is-visible {
+    // show
+    position: relative;
+    clip: auto;
+    clip-path: none;
+  }
+  
+  .newsletter__feedback--success {
+    background-color: alpha(var(--color-success), 0.2);
+  
+    &::before {
+      color: alpha(var(--color-success), 0.2); // triangle color
+    }
+  }
+  
+  .newsletter__feedback--error {
+    background-color: alpha(var(--color-error), 0.2);
+  
+    &::before {
+      color: alpha(var(--color-error), 0.2); // triangle color
+    }
+  }
+  
+  .newsletter__feedback--warning {
+    background-color: alpha(var(--color-warning), 0.2);
+  
+    &::before {
+      color: alpha(var(--color-warning), 0.2); // triangle color
+    }
+  }
+  
+  .newsletter__small {
+    line-height: 1.4;
+    color: var(--color-contrast-medium);
+  
+    a {
+      color: var(--color-contrast-high);
+    }
+  }
+
+  /* -------------------------------- 
+
+Title: Main Footer
+Descr: Footer navigation
+
+-------------------------------- */
+
+.main-footer {
+    background-color: var(--color-primary);
+    padding: var(--space-lg) 0;
+  }
+  
+  .main-footer__content {
+    @include breakpoint(md) { // align logo + nav
+      display: flex;
+      justify-content: center;
+    }
+  }
+  
+  .main-footer__logo {
+    flex-shrink: 0;
+    margin-bottom: var(--space-md);
+  
+    a, svg, img {
+      width: 130px;
+      height: 32px;
+      display: block;
+    }
+  }
+  
+  .main-footer__nav {
+    @include breakpoint(md) {
+      width: calc(100% - 420px);
+    }
+  
+    @include breakpoint(lg) {
+      width: auto;
+    }
+  }
+  
+  .main-footer__nav-list { // ul
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .main-footer__nav-item {
+    display: grid;
+    grid-gap: var(--space-xxs);
+    margin-bottom: var(--space-md);
+    width: 100%;
+    padding-right: var(--space-sm);
+  
+    @include breakpoint(xs) {
+      width: 50%;
+    }
+  
+    @include breakpoint(lg) {
+      grid-gap: var(--space-xs);
+      width: 240px;
+    }
+  }
+  
+  .main-footer__nav-item a { // footer nav link
+    color: var(--color-contrast-low);
+  
+    &:hover {
+      color: var(--color-contrast-high);
+    }
+  
+    @include breakpoint(lg) {
+      font-size: 0.9em;
+    }
+  }
+  
+  // colophon
+  .main-footer__colophon {
+    //border-top: 1px solid var(--color-contrast-low);
+    padding-top: var(--space-xxxs);
+    margin-top: var(--space-md);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  .main-footer__colophon-nav {
+    font-size: var(--text-sm);
+    color: var(--color-contrast-low);
+    margin-right: var(--space-sm);
+  
+    > * {
+      margin-right: var(--space-xxs);
+    }
+  
+    a {
+      color: inherit;
+  
+      &:hover {
+        color: var(--color-contrast-high);
+      }
+    }
+  }
+  
+  .main-footer__socials {
+    display: flex;
+    margin: var(--space-xxs) 0;
+  
+    a {
+      text-decoration: none;
+      display: inline-block;
+      margin-left: var(--space-xxs);
+      color: var(--color-contrast-low);
+  
+      &:hover {
+        color: var(--color-contrast-high);
+      }
+  
+      svg {
+        display: block;
+        width: 2em;
+        height: 2em;
+        color: inherit;
+      }
+    }
+  }
+
+  .test{
+    background: green
+  }
+  
